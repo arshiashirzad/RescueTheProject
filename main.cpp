@@ -84,7 +84,6 @@ int main() {
       std::cin >> a;
       charArr.add(a);
     }
-    // remove all a from array
     if (charArr.remove('b')) {
       std::cout << "b removed from array" << std::endl;
     } else {
