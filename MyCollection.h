@@ -1,9 +1,9 @@
 #ifndef MYCOLLECTION_H
 #define MYCOLLECTION_H
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
+using namespace std;
 
 template<typename T>
 class Collection {
@@ -23,5 +23,42 @@ public:
     virtual T& operator[](size_t index) = 0;
     virtual ~Collection() {}
 };
+template<typename T>
+class Array : public Collection<T> {
+private:
+    vector<T> elements;
 
-#endif //RESCUETHEPROJECT_MYCOLLECTION_H
+public:
+    Array() {}
+
+    void add(const T& item) override {
+        elements.push_back(item);
+    }
+
+    void addAll(const Collection<T>& items) override {
+        for (size_t i = 0; i < items.size(); ++i) {
+            elements.push_back(items[i]);
+        }
+    }
+
+    void clear() override {
+        elements.clear();
+    }
+
+    size_t size() const override {
+        return elements.size();
+    }
+
+    bool isEmpty() const override {
+        return elements.empty();
+    }
+
+    const T& operator[](size_t index) const override {
+        return elements[index];
+    }
+
+    T& operator[](size_t index) override {
+        return elements[index];
+    }
+};
+#endif
